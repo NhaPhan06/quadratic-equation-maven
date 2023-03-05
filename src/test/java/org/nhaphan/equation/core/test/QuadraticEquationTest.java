@@ -36,7 +36,8 @@ public class QuadraticEquationTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testQuadraticEquationGivenWrongValueA() {
         quadraticEquation = new QuadraticEquation(0, 2, 3);
-        quadraticEquation.solve();
+        String result = quadraticEquation.solve();
+        Assert.assertEquals(result, "x1 = 6.0, x2 = 5.0");
     }
 
     // cho các biến a = 1, b = -16 , c = 84 để tình ra delta < 0
@@ -47,24 +48,4 @@ public class QuadraticEquationTest {
         quadraticEquation.solve();
     }
 
-    
-    // Test lại các trường hợp phía trên bằng cách sử dụng mảng 2 chiều 
-    // Sử dựng phương thức DataProvider được gán tên là equations để truyền vào một Object mảng 2 chiểu
-    // bao gồm 3 biến a b c và 1 biến mong đợi
-    @DataProvider(name = "equations")
-    public Object[][] equations() {
-        return new Object[][]{
-            {1, -4, 4, "x = 2.0"},
-            {1, -11, 30, "x1 = 6.0, x2 = 5.0"},
-        };
-    }
-    
-    //gọi tới dataprovider băng tên 
-    // testNG tự động gán vào trong hàm test
-    @Test(dataProvider = "equations")
-    public void testSolveWithMultipleEquations(double a, double b, double c, String expected) {
-        QuadraticEquation quadraticEquation = new QuadraticEquation(a, b, c);
-        String result = quadraticEquation.solve();
-        Assert.assertEquals(result, expected);
-    }
 }
